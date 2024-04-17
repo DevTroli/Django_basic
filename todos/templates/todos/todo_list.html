@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <title>Lista de Tarefas Django</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="icon" href="favicon.ico">
+</head>
+
+<body>
+  <div class="w-full h-screen bg-gray-200 pt-8">
+    <div class="bg-white p-3 max-w-md mx-auto shadow-lg">
+      <div class="text-center">
+        <h1 class="text-3xl font-bold">ToDo App</h1>
+        <div class="mt-4 flex">
+          <input class="w-full border-b-2 border-gray-500 text-black mr-8 p-2" type="text"
+            placeholder="Digite sua nova tarefa" id="newTaskInput">
+          <button
+            class="mr-2 border-2 border-blue-500 p-2 text-blue-500 hover:text-white hover:bg-blue-500 rounded-lg flex">
+            <svg class="h-6 w-6" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+              fill="none" stroke-linecap="round" stroke-linejoin="round">
+              <path stroke="none" d="M0 0h24v24H0z" />
+              <circle cx="12" cy="12" r="9" />
+              <line x1="9" y1="12" x2="15" y2="12" />
+              <line x1="12" y1="9" x2="12" y2="15" />
+            </svg>
+          </button>
+        </div>
+      </div>
+      {% if todos %}
+      <div class="mt-8">
+        <ul>
+          {% for todo in todos %}
+          <li class="p-2 rounded-lg">
+            <div class="flex align-middle flex-row justify-between">
+              <div class="p-2">
+                <p class="text-lg text-black">{{ todo.title }}</p>
+                <span class="text-sm text-gray-400 mx-0.5">
+                  Done on: {{ todo.done_date|default:"*task in progress*"}}
+                </span>
+              </div>
+              <div class="p-2 flex items-center gap-2">
+                <button
+                  class="mr-2 border-2 border-green-600 p-2 text-green-600 hover:text-white hover:bg-green-400 rounded-lg flex">
+                  <svg class="h-4 w-4 hover:text-white" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                    xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 240.608 240.608" xml:space="preserve"
+                    fill="#16A34A">
+                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                    <g id="SVGRepo_iconCarrier">
+                      <path style="fill:#16A34A;"
+                        d="M208.789,29.972l31.819,31.82L91.763,210.637L0,118.876l31.819-31.82l59.944,59.942L208.789,29.972z">
+                      </path>
+                    </g>
+                  </svg> </button>
+                <button
+                  class="flex border-2 border-red-500 text-red-500 hover:text-white hover:bg-red-600 p-2 rounded-lg">
+                  <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="12" r="10" />
+                    <line x1="15" y1="9" x2="9" y2="15" />
+                    <line x1="9" y1="9" x2="15" y2="15" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <hr class="mt-2" />
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% else %}
+      <br>
+      <p>Não há tarefas no momento, fique à vontade para criar uma nova!</p>
+      <br>
+      {% endif %}
+    </div>
+  </div>
+</body>
+
+</html>
