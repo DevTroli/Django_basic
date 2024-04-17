@@ -1,3 +1,4 @@
+<!-- todo_list.html -->
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -14,11 +15,15 @@
     <div class="bg-white p-3 max-w-md mx-auto shadow-lg">
       <div class="text-center">
         <h1 class="text-3xl font-bold">ToDo App</h1>
-        <div class="mt-4 flex">
-          <input class="w-full border-b-2 border-gray-500 text-black mr-8 p-2" type="text"
-            placeholder="Digite sua nova tarefa" id="newTaskInput">
-          <button
-            class="mr-2 border-2 border-blue-500 p-2 text-blue-500 hover:text-white hover:bg-blue-500 rounded-lg flex">
+        <form method="post" class="mt-4 flex gap-2">
+          {% csrf_token %}
+          <div class="relative z-0 w-full group">
+            <input type="text" name="title" id="title"
+              class=" mr-2 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+              placeholder='Write your task down' required />
+          </div>
+          <button type="submit"
+            class="mr-2 border-2 border-blue-500 p-2 h-fit text-blue-500 hover:text-white hover:bg-blue-500 rounded-lg flex">
             <svg class="h-6 w-6" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
               fill="none" stroke-linecap="round" stroke-linejoin="round">
               <path stroke="none" d="M0 0h24v24H0z" />
@@ -27,12 +32,12 @@
               <line x1="12" y1="9" x2="12" y2="15" />
             </svg>
           </button>
-        </div>
+        </form>
       </div>
-      {% if todos %}
+      {% if todo_list %}
       <div class="mt-8">
         <ul>
-          {% for todo in todos %}
+          {% for todo in todo_list %}
           <li class="p-2 rounded-lg">
             <div class="flex align-middle flex-row justify-between">
               <div class="p-2">
@@ -54,7 +59,8 @@
                         d="M208.789,29.972l31.819,31.82L91.763,210.637L0,118.876l31.819-31.82l59.944,59.942L208.789,29.972z">
                       </path>
                     </g>
-                  </svg> </button>
+                  </svg>
+                </button>
                 <button
                   class="flex border-2 border-red-500 text-red-500 hover:text-white hover:bg-red-600 p-2 rounded-lg">
                   <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
