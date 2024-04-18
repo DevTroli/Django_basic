@@ -3,7 +3,7 @@
 <html lang="pt-br">
 
 <head>
-  <title>Lista de Tarefas Django</title>
+  <title>Task List | Django</title>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <script src="https://cdn.tailwindcss.com"></script>
@@ -11,6 +11,65 @@
 </head>
 
 <body>
+  <!-- Modal -->
+  <div class="fixed z-10 inset-0 overflow-y-auto hidden" id="confirmModal">
+    <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+      <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+        <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+      </div>
+      <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+      <div
+        class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full"
+        role="dialog" aria-modal="true" aria-labelledby="modal-headline">
+        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+          <div class="sm:flex sm:items-start">
+            <div
+              class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+              <svg fill="#DC2626" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink" class="h-6 w-6" viewBox="0 0 44.271 44.271"
+                xml:space="preserve">
+                <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+                <g id="SVGRepo_iconCarrier">
+                  <g>
+                    <g>
+                      <path
+                        d="M42.355,10.833l-9.189-9.066c-1.092-1.091-2.674-1.684-4.217-1.684H14.547c-1.541,0-3.02,0.593-4.11,1.684l-8.909,9.076 C0.437,11.934,0,13.404,0,14.945v14.402c0,1.542,0.437,3.021,1.528,4.111l8.998,9.056c1.09,1.09,2.481,1.674,4.022,1.674h14.403 c1.541,0,3.021-0.584,4.111-1.674l9.295-9.071c1.09-1.09,1.914-2.555,1.914-4.097V14.944 C44.269,13.403,43.447,11.924,42.355,10.833z M22.134,32.766c-1.528,0-2.766-1.264-2.766-2.823c0-1.561,1.238-2.824,2.766-2.824 s2.767,1.264,2.767,2.824C24.9,31.502,23.662,32.766,22.134,32.766z M24.9,22.375c0,1.559-1.207,2.822-2.767,2.822 s-2.767-1.264-2.767-2.822v-11.65c0-1.559,1.207-2.824,2.767-2.824S24.9,9.166,24.9,10.724V22.375z">
+                      </path>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+            </div>
+            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+              <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-headline">
+                Delete your task
+              </h3>
+              <div class="mt-2">
+                <p class="text-sm text-gray-500">
+                  Are you sure you want to delete this task?
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+          <form method="post" id="deleteForm">
+            {% csrf_token %}
+            <button type="submit"
+              class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
+              Delete
+            </button>
+          </form>
+          <button type="button" id="cancelButton"
+            class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+            Cancel
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="w-full h-screen bg-gray-200 pt-8">
     <div class="bg-white p-3 max-w-md mx-auto shadow-lg">
       <div class="text-center">
@@ -47,6 +106,18 @@
                 </span>
               </div>
               <div class="p-2 flex items-center gap-2">
+                <form method="post" action="#" class="inline">
+                  {% csrf_token %}
+                  <button type="button" data-action="{% url 'remove_todo' todo.id %}"
+                    class="flex border-2 border-red-500 text-red-500 hover:text-white hover:bg-red-600 p-2 rounded-lg delete-button">
+                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                      stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                      <circle cx="12" cy="12" r="10" />
+                      <line x1="15" y1="9" x2="9" y2="15" />
+                      <line x1="9" y1="9" x2="15" y2="15" />
+                    </svg>
+                  </button>
+                </form>
                 <button
                   class="mr-2 border-2 border-green-600 p-2 text-green-600 hover:text-white hover:bg-green-400 rounded-lg flex">
                   <svg class="h-4 w-4 hover:text-white" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
@@ -61,15 +132,6 @@
                     </g>
                   </svg>
                 </button>
-                <button
-                  class="flex border-2 border-red-500 text-red-500 hover:text-white hover:bg-red-600 p-2 rounded-lg">
-                  <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
-                    <circle cx="12" cy="12" r="10" />
-                    <line x1="15" y1="9" x2="9" y2="15" />
-                    <line x1="9" y1="9" x2="15" y2="15" />
-                  </svg>
-                </button>
               </div>
             </div>
             <hr class="mt-2" />
@@ -79,11 +141,25 @@
       </div>
       {% else %}
       <br>
-      <p>Não há tarefas no momento, fique à vontade para criar uma nova!</p>
+      <p>There are no tasks at the moment, feel free to create a new one!</p>
       <br>
       {% endif %}
     </div>
   </div>
+
+  <script>
+    document.querySelectorAll('.delete-button').forEach(button => {
+      button.addEventListener('click', () => {
+        document.querySelector('#confirmModal').classList.remove('hidden');
+        const form = document.querySelector('#deleteForm');
+        form.action = button.dataset.action;
+      });
+    });
+
+    document.querySelector('#cancelButton').addEventListener('click', () => {
+      document.querySelector('#confirmModal').classList.add('hidden');
+    });
+  </script>
 </body>
 
 </html>
