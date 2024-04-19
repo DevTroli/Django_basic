@@ -77,7 +77,5 @@ class CompleteTaskView(View):
             HttpResponseRedirect: Redirects back to the todo list page after marking the todo as complete.
         """
         todo = get_object_or_404(Todo, id=todo_id)
-        todo.done_date = date.today()
-        todo.completed = True  # Mark the todo as completed
-        todo.save()
+        todo.done_task()
         return redirect("todo_list")

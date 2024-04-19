@@ -1,3 +1,4 @@
+from datetime import date
 from django.db import models
 
 
@@ -18,11 +19,25 @@ class Todo(models.Model):
 
     done_date = models.DateField(null=True, blank=False)
     """
-    Date when the task was done.
-    
+    The date when the task was marked as done.
+
     Attributes:
         null (bool): Whether null values are allowed.
         blank (bool): Whether the field is allowed to be blank.
     """
 
+    def done_task(self):
+        """
+        Method to mark a task as done, setting the done_date to today's date.
+        """
+        if not self.done_date:
+            self.done_date = date.today()
+            self.completed = True
+            self.save()
 
+    class Meta:
+        """
+        Metadata for the Todo model.
+        """
+
+        ordering = ["done_date"]

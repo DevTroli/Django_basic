@@ -1,8 +1,8 @@
 # Project name
 
-![GitHub repo size](https://img.shields.io/github/repo-size/DevTroli/myREADME_template)
-![GitHub stars](https://img.shields.io/github/stars/DevTroli/myREADME_template)
-![GitHub forks](https://img.shields.io/github/forks/DevTroli/myREADME_template?style=social)
+![GitHub repo size](https://img.shields.io/github/repo-size/DevTroli/Django_basic)
+![GitHub stars](https://img.shields.io/github/stars/DevTroli/Django_basic)
+![GitHub forks](https://img.shields.io/github/forks/DevTroli/Django_basic?style=social)
 
 Additional line of information text about what the project does. Your introduction should be around 2 or 3 sentences. Don't go overboard, people won't read it.
 
@@ -32,7 +32,7 @@ This project makes it easy to:
 To install ToDo APP, follow these steps:
 
 ```
-    pip install -r requirements.txt
+pip install -r requirements.txt
 ```
 
 ## Using <project_name>
@@ -43,12 +43,12 @@ To use ToDo APP, follow these steps:
 
 Clone the repository Navigate to the project directory
 ```
-    git clone https://github.com/DevTroli/TodoApp.git
+git clone https://github.com/DevTroli/TodoApp.git
 ```
 
 Run the Django server: 
 ```
-   python manage.py runserver
+python manage.py runserver
 ```
 
 ### Contributing to <project_name>
