@@ -1,5 +1,6 @@
 from django.db import models
 
+
 class Todo(models.Model):
     """
     ORM to represent the data in a SQL table as a Django model
@@ -23,3 +24,5 @@ class Todo(models.Model):
         null (bool): Whether null values are allowed.
         blank (bool): Whether the field is allowed to be blank.
     """
+
+
