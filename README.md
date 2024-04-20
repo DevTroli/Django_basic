@@ -1,10 +1,8 @@
-# Project name
+# Task List 
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/DevTroli/Django_basic)
 ![GitHub stars](https://img.shields.io/github/stars/DevTroli/Django_basic)
 ![GitHub forks](https://img.shields.io/github/forks/DevTroli/Django_basic?style=social)
-
-Additional line of information text about what the project does. Your introduction should be around 2 or 3 sentences. Don't go overboard, people won't read it.
 
 # Tech Stack
 + Python
