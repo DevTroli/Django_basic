@@ -22,20 +22,20 @@ Before you start, make sure you meet the following requirements:
 
 This project makes it easy to:
 * Bootstrap your open-source project properly
-* Make sure everyone gets what you're trying to achieve with your project_name
+* Make sure everyone gets what you're trying to achieve with your toDo List 
 * Follow simple instructions for a perfect README.md
 
-## Installing <project_name>
+## Installing Task List
 
-To install ToDo APP, follow these steps:
+To install Task list APP, follow these steps:
 
 ```
 pip install -r requirements.txt
 ```
 
-## Using <project_name>
+## Using Task List
 
-To use ToDo APP, follow these steps:
+To use Task list APP, follow these steps:
 
 
 
@@ -49,7 +49,7 @@ Run the Django server:
 python manage.py runserver
 ```
 
-### Contributing to <project_name>
+### Contributing to Task List
 <!--- If your README is long or you have some specific process or steps you want contributors to follow, consider creating a separate CONTRIBUTING.md file--->
 To contribute to ToDo APP, follow these steps:
 
