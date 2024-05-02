@@ -13,9 +13,34 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 from pathlib import Path
 from decouple import config, Csv
 from dj_database_url import parse as db_url
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+VERCEL = config("VERCEL", default=False, cast=bool)
+
+# Database
+# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+
+if VERCEL:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
+else:
+    # Se não estiver na Vercel, use a configuração do DATABASE_URL
+    DATABASES = {
+        "default": config(
+            "DATABASE_URL", default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}", cast=db_url
+        )
+    }
+
+# Verifica se o arquivo do banco de dados SQLite existe e o cria se não existir
+if os.getenv("VERCEL") and not os.path.exists(BASE_DIR / "db.sqlite3"):
+    os.makedirs(BASE_DIR, exist_ok=True)
+    open(BASE_DIR / "db.sqlite3", "w").close()
 
 
 # Quick-start development settings - unsuitable for production
@@ -71,17 +96,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "setup.wsgi.application"
-
-
-# Database
-# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
-
-DATABASES = {
-    "default": config(
-        "DATABASE_URL", default=f'sqlite:///{BASE_DIR / "db.sqlite3"}', cast=db_url
-    )
-}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
